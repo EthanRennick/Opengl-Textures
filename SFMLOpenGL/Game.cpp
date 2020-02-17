@@ -61,7 +61,7 @@ GLuint	index,		//Index to draw
 //const string filename = "texture.tga";
 //const string filename = "cube.tga";
 
-const string filename = "texture.tga";
+const string filename = "cube.tga";
 
 int width; //width of texture
 int height; //height of texture
@@ -124,6 +124,10 @@ void Game::initialize()
 	vertex[7].coordinate[1] = (cube.at(7).y); //2
 	vertex[7].coordinate[2] = (cube.at(7).z); //2
 
+	vertex[8].coordinate[0] = (cube.at(0).x); //3
+	vertex[8].coordinate[1] = (cube.at(0).y); //3
+	vertex[8].coordinate[2] = (cube.at(0).z); //3
+
 	vertex[0].color[0] = 1.0f;
 	vertex[0].color[1] = 0.0f;
 	vertex[0].color[2] = 0.0f;
@@ -139,14 +143,54 @@ void Game::initialize()
 	vertex[2].color[2] = 0.0f;
 	vertex[2].color[3] = 0.0f;
 
+	vertex[3].color[0] = 1.0f;
+	vertex[3].color[1] = 0.0f;
+	vertex[3].color[2] = 0.0f;
+	vertex[3].color[3] = 1.0f;
+
+	vertex[4].color[0] = 1.0f;
+	vertex[4].color[1] = 0.0f;
+	vertex[4].color[2] = 0.0f;
+	vertex[4].color[3] = 1.0f;
+
+	vertex[5].color[0] = 1.0f;
+	vertex[5].color[1] = 0.0f;
+	vertex[5].color[2] = 0.0f;
+	vertex[5].color[3] = 0.0f;
+
+	vertex[6].color[0] = 1.0f;
+	vertex[6].color[1] = 0.0f;
+	vertex[6].color[2] = 0.0f;
+	vertex[6].color[3] = 1.0f;
+
+	vertex[7].color[0] = 1.0f;
+	vertex[7].color[1] = 0.0f;
+	vertex[7].color[2] = 0.0f;
+	vertex[7].color[3] = 0.0f;
+
 	vertex[0].texel[0] = 0.0f;
 	vertex[0].texel[1] = 0.0f;
 
-	vertex[1].texel[0] = 1.0f;
-	vertex[1].texel[1] = 0.0f;
+	vertex[1].texel[0] = 0.0f;
+	vertex[1].texel[1] = 0.75f;
 
-	vertex[2].texel[0] = 1.0f;
-	vertex[2].texel[1] = 1.0f;
+	vertex[2].texel[0] = 0.25f;
+	vertex[2].texel[1] = 0.75f;
+
+	vertex[3].texel[0] = 0.25f;
+	vertex[3].texel[1] = 0.5f;
+
+	vertex[4].texel[0] = 0.0f;
+	vertex[4].texel[1] = 0.0f;
+
+	vertex[5].texel[0] = 0.0f;
+	vertex[5].texel[1] = 0.0f;
+
+	vertex[6].texel[0] = 0.0f;
+	vertex[6].texel[1] = 0.0f;
+
+	vertex[7].texel[0] = 0.0f;
+	vertex[7].texel[1] = 0.0f;
 
 	/*Index of Poly / Triangle to Draw */
 
@@ -611,7 +655,7 @@ void Game::render()
 
 	/*	As the data positions will be updated by the this program on the
 		CPU bind the updated data to the GPU for drawing	*/
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 3, vertex, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 36, vertex, GL_STATIC_DRAW);
 
 	/*	Draw Triangle from VBO	(set where to start from as VBO can contain
 		model components that 'are' and 'are not' to be drawn )	*/
