@@ -44,6 +44,7 @@ typedef struct
 Vertex vertex[24];
 GLubyte triangles[36];
 vector<gpp::Vector3> cube;
+vector<gpp::Vector3> aaaa;
 
 /* Variable to hold the VBO identifier and shader data */
 GLuint	index,		//Index to draw
@@ -75,59 +76,85 @@ void Game::initialize()
 	isRunning = true;
 	GLint isCompiled = 0;
 	GLint isLinked = 0;
+	glEnable(GL_CULL_FACE);
 
 	glewInit();
-
-	cube.push_back(gpp::Vector3(-1.0f, 1.0f, 1.0f)); //3 - 0
-	cube.push_back(gpp::Vector3(-1.0f, -1.0f, 1.0f)); //2 - 1
-	cube.push_back(gpp::Vector3(1.0f, -1.0f, 1.0f)); //1 - 2
-	cube.push_back(gpp::Vector3(1.0f, 1.0f, 1.0f)); //4 - 3
-	cube.push_back(gpp::Vector3(-1.0f, 1.0f, -1.0f)); //7 - 4
-	cube.push_back(gpp::Vector3(1.0f, 1.0f, -1.0f)); //8 - 5
-	cube.push_back(gpp::Vector3(1.0f, -1.0f, -1.0f)); //6 - 6
-	cube.push_back(gpp::Vector3(-1.0f, -1.0f, -1.0f)); //5 - 7
+	
+	cube.push_back(gpp::Vector3(-1.0f, 1.0f, 1.0f)); //2 - 0
+	cube.push_back(gpp::Vector3(-1.0f, -1.0f, 1.0f)); //1 - 1
+	cube.push_back(gpp::Vector3(1.0f, -1.0f, 1.0f)); //0 - 2
+	cube.push_back(gpp::Vector3(1.0f, 1.0f, 1.0f)); //3 - 3
+	cube.push_back(gpp::Vector3(-1.0f, 1.0f, -1.0f)); //6 - 4
+	cube.push_back(gpp::Vector3(1.0f, 1.0f, -1.0f)); //7 - 5
+	cube.push_back(gpp::Vector3(1.0f, -1.0f, -1.0f)); //5 - 6
+	cube.push_back(gpp::Vector3(-1.0f, -1.0f, -1.0f)); //4 - 7
 
 	DEBUG_MSG(glGetString(GL_VENDOR));
 	DEBUG_MSG(glGetString(GL_RENDERER));
 	DEBUG_MSG(glGetString(GL_VERSION));
 
+
+	// Front Face
 	/* Vertices counter-clockwise winding */
 	vertex[0].coordinate[0] = (cube.at(0).x); //3
 	vertex[0].coordinate[1] = (cube.at(0).y); //3
 	vertex[0].coordinate[2] = (cube.at(0).z); //3
-
 	vertex[1].coordinate[0] = (cube.at(1).x); //1
 	vertex[1].coordinate[1] = (cube.at(1).y); //1
 	vertex[1].coordinate[2] = (cube.at(1).z); //1
-
 	vertex[2].coordinate[0] = (cube.at(2).x); //2
 	vertex[2].coordinate[1] = (cube.at(2).y); //2
 	vertex[2].coordinate[2] = (cube.at(2).z); //2
-
 	vertex[3].coordinate[0] = (cube.at(3).x); //3
 	vertex[3].coordinate[1] = (cube.at(3).y); //3
 	vertex[3].coordinate[2] = (cube.at(3).z); //3
 
+	// Back Face
 	vertex[4].coordinate[0] = (cube.at(4).x); //1
 	vertex[4].coordinate[1] = (cube.at(4).y); //1
 	vertex[4].coordinate[2] = (cube.at(4).z); //1
-
 	vertex[5].coordinate[0] = (cube.at(5).x); //2
 	vertex[5].coordinate[1] = (cube.at(5).y); //2
 	vertex[5].coordinate[2] = (cube.at(5).z); //2
-
 	vertex[6].coordinate[0] = (cube.at(6).x); //1
 	vertex[6].coordinate[1] = (cube.at(6).y); //1
 	vertex[6].coordinate[2] = (cube.at(6).z); //1
-
 	vertex[7].coordinate[0] = (cube.at(7).x); //2
 	vertex[7].coordinate[1] = (cube.at(7).y); //2
 	vertex[7].coordinate[2] = (cube.at(7).z); //2
 
-	vertex[8].coordinate[0] = (cube.at(0).x); //3
-	vertex[8].coordinate[1] = (cube.at(0).y); //3
-	vertex[8].coordinate[2] = (cube.at(0).z); //3
+	// Right Face
 
+	vertex[8].coordinate[0] = (cube.at(3).x); //
+	vertex[8].coordinate[1] = (cube.at(3).y); //
+	vertex[8].coordinate[2] = (cube.at(3).z); //
+	vertex[9].coordinate[0] = (cube.at(5).x); //
+	vertex[5].coordinate[1] = (cube.at(5).y); //
+	vertex[9].coordinate[2] = (cube.at(5).z); //
+	vertex[10].coordinate[0] = (cube.at(6).x); //
+	vertex[10].coordinate[1] = (cube.at(6).y); 
+	vertex[10].coordinate[2] = (cube.at(6).z); //
+	vertex[11].coordinate[0] = (cube.at(2).x); //
+	vertex[11].coordinate[1] = (cube.at(2).y); //
+	vertex[11].coordinate[2] = (cube.at(2).z); //
+
+	//left
+	vertex[12].coordinate[0] = (cube.at(4).x); //
+	vertex[12].coordinate[1] = (cube.at(4).y); //
+	vertex[12].coordinate[2] = (cube.at(4).z); //
+
+	vertex[13].coordinate[0] = (cube.at(7).x); //
+	vertex[13].coordinate[1] = (cube.at(7).y); //
+	vertex[13].coordinate[2] = (cube.at(7).z); //
+
+	vertex[14].coordinate[0] = (cube.at(1).x); //
+	vertex[14].coordinate[1] = (cube.at(1).y); //
+	vertex[14].coordinate[2] = (cube.at(1).z); //
+
+	vertex[15].coordinate[0] = (cube.at(0).x); //
+	vertex[15].coordinate[1] = (cube.at(0).y); //
+	vertex[15].coordinate[2] = (cube.at(0).z); //
+	//0471
 	vertex[0].color[0] = 1.0f;
 	vertex[0].color[1] = 0.0f;
 	vertex[0].color[2] = 0.0f;
@@ -168,42 +195,78 @@ void Game::initialize()
 	vertex[7].color[2] = 0.0f;
 	vertex[7].color[3] = 0.0f;
 
-	vertex[0].texel[0] = 0.0f;
-	vertex[0].texel[1] = 0.0f;
+	vertex[8].color[0] = 1.0f;
+	vertex[8].color[1] = 0.0f;
+	vertex[8].color[2] = 0.0f;
+	vertex[8].color[3] = 0.0f;
 
-	vertex[1].texel[0] = 0.0f;
-	vertex[1].texel[1] = 0.75f;
+	vertex[9].color[0] = 1.0f;
+	vertex[9].color[1] = 0.0f;
+	vertex[9].color[2] = 0.0f;
+	vertex[9].color[3] = 0.0f;
+	vertex[10].color[0] = 1.0f;
+	vertex[10].color[1] = 0.0f;
+	vertex[10].color[2] = 0.0f;
+	vertex[10].color[3] = 0.0f;
+	vertex[11].color[0] = 1.0f;
+	vertex[11].color[1] = 0.0f;
+	vertex[11].color[2] = 0.0f;
+	vertex[11].color[3] = 0.0f;
 
-	vertex[2].texel[0] = 0.25f;
-	vertex[2].texel[1] = 0.75f;
-
+	vertex[0].texel[0] = 0.25f;
+	vertex[0].texel[1] = 0.50f;
+	vertex[1].texel[0] = 0.5f;
+	vertex[1].texel[1] = 0.5f;
+	vertex[2].texel[0] = 0.5f;
+	vertex[2].texel[1] = 0.25f;
 	vertex[3].texel[0] = 0.25f;
-	vertex[3].texel[1] = 0.5f;
+	vertex[3].texel[1] = 0.25f;
 
-	vertex[4].texel[0] = 0.0f;
-	vertex[4].texel[1] = 0.0f;
+	vertex[4].texel[0] = 0.75f;
+	vertex[4].texel[1] = 0.5f;
+	vertex[5].texel[0] = 1.0f;
+	vertex[5].texel[1] = 0.5f;
+	vertex[6].texel[0] = 1.0f;
+	vertex[6].texel[1] = 0.25f;
+	vertex[7].texel[0] = 0.75f;
+	vertex[7].texel[1] = 0.25f;
 
-	vertex[5].texel[0] = 0.0f;
-	vertex[5].texel[1] = 0.0f;
+	vertex[8].texel[0] = 0.25f;
+	vertex[8].texel[1] = 0.5f;
+	vertex[9].texel[0] = 0.5f;
+	vertex[9].texel[1] = 0.5f;
+	vertex[10].texel[0] = 0.5f;
+	vertex[10].texel[1] = 0.25f;
+	vertex[10].texel[0] = 0.25f;
+	vertex[10].texel[1] = 0.25f;
 
-	vertex[6].texel[0] = 0.0f;
-	vertex[6].texel[1] = 0.0f;
+	vertex[11].texel[0] = 0.0f;
+	vertex[11].texel[1] = 0.5f;
+	vertex[12].texel[0] = 0.25f;
+	vertex[12].texel[1] = 0.5f;
+	vertex[13].texel[0] = 0.25f;
+	vertex[13].texel[1] = 0.25f;
+	vertex[14].texel[0] = 0.0f;
+	vertex[14].texel[1] = 0.25f;
 
-	vertex[7].texel[0] = 0.0f;
-	vertex[7].texel[1] = 0.0f;
 
 	/*Index of Poly / Triangle to Draw */
 
-	triangles[0] = 3;   triangles[1] = 0;   triangles[2] = 1; // Front
-	triangles[3] = 1;   triangles[4] = 2;   triangles[5] = 3;
-	triangles[6] = 3;   triangles[7] = 2;   triangles[8] = 6; // Right
-	triangles[9] = 6;   triangles[10] = 5;   triangles[11] = 3;
+	triangles[0] = 0;   triangles[1] = 1;   triangles[2] = 2; // Front
+	triangles[3] = 2;   triangles[4] = 3;   triangles[5] = 0;
+
+	triangles[6] = 2;   triangles[7] = 6;   triangles[8] = 5; // Right
+	triangles[9] = 5;   triangles[10] = 3;   triangles[11] = 2;
+
 	triangles[12] = 0;   triangles[13] = 3;   triangles[14] = 5; // Top
 	triangles[15] = 5;   triangles[16] = 4;   triangles[17] = 0;
+
 	triangles[18] = 7;   triangles[19] = 1;   triangles[20] = 0; // Left
 	triangles[21] = 0;   triangles[22] = 4;   triangles[23] = 7;
+
 	triangles[24] = 6;   triangles[25] = 2;   triangles[26] = 1; // Bottom
 	triangles[27] = 1;   triangles[28] = 7;   triangles[29] = 6;
+
 	triangles[30] = 4;   triangles[31] = 5;   triangles[32] = 6; // Back
 	triangles[33] = 6;   triangles[34] = 7;   triangles[35] = 4;
 
