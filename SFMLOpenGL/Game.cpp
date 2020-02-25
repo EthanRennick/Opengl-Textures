@@ -44,7 +44,6 @@ typedef struct
 Vertex vertex[24];
 GLubyte triangles[36];
 vector<gpp::Vector3> cube;
-vector<gpp::Vector3> aaaa;
 
 /* Variable to hold the VBO identifier and shader data */
 GLuint	index,		//Index to draw
@@ -129,7 +128,7 @@ void Game::initialize()
 	vertex[8].coordinate[1] = (cube.at(3).y); //
 	vertex[8].coordinate[2] = (cube.at(3).z); //
 	vertex[9].coordinate[0] = (cube.at(5).x); //
-	vertex[5].coordinate[1] = (cube.at(5).y); //
+	vertex[9].coordinate[1] = (cube.at(5).y); //
 	vertex[9].coordinate[2] = (cube.at(5).z); //
 	vertex[10].coordinate[0] = (cube.at(6).x); //
 	vertex[10].coordinate[1] = (cube.at(6).y); 
@@ -154,7 +153,42 @@ void Game::initialize()
 	vertex[15].coordinate[0] = (cube.at(0).x); //
 	vertex[15].coordinate[1] = (cube.at(0).y); //
 	vertex[15].coordinate[2] = (cube.at(0).z); //
-	//0471
+
+		//top
+	vertex[16].coordinate[0] = (cube.at(4).x); //
+	vertex[16].coordinate[1] = (cube.at(4).y); //
+	vertex[16].coordinate[2] = (cube.at(4).z); //
+
+	vertex[17].coordinate[0] = (cube.at(5).x); //
+	vertex[17].coordinate[1] = (cube.at(5).y); //
+	vertex[17].coordinate[2] = (cube.at(5).z); //
+
+	vertex[18].coordinate[0] = (cube.at(3).x); //
+	vertex[18].coordinate[1] = (cube.at(3).y); //
+	vertex[18].coordinate[2] = (cube.at(3).z); //
+
+	vertex[19].coordinate[0] = (cube.at(0).x); //
+	vertex[19].coordinate[1] = (cube.at(0).y); //
+	vertex[19].coordinate[2] = (cube.at(0).z); //
+
+			//bottom
+	vertex[20].coordinate[0] = (cube.at(1).x); //
+	vertex[20].coordinate[1] = (cube.at(1).y); //
+	vertex[20].coordinate[2] = (cube.at(1).z); //
+
+	vertex[21].coordinate[0] = (cube.at(7).x); //
+	vertex[21].coordinate[1] = (cube.at(7).y); //
+	vertex[21].coordinate[2] = (cube.at(7).z); //
+
+	vertex[22].coordinate[0] = (cube.at(6).x); //
+	vertex[22].coordinate[1] = (cube.at(6).y); //
+	vertex[22].coordinate[2] = (cube.at(6).z); //
+
+	vertex[23].coordinate[0] = (cube.at(2).x); //
+	vertex[23].coordinate[1] = (cube.at(2).y); //
+	vertex[23].coordinate[2] = (cube.at(2).z); //
+
+	
 	vertex[0].color[0] = 1.0f;
 	vertex[0].color[1] = 0.0f;
 	vertex[0].color[2] = 0.0f;
@@ -213,6 +247,7 @@ void Game::initialize()
 	vertex[11].color[2] = 0.0f;
 	vertex[11].color[3] = 0.0f;
 
+	//front
 	vertex[0].texel[0] = 0.25f;
 	vertex[0].texel[1] = 0.50f;
 	vertex[1].texel[0] = 0.5f;
@@ -222,6 +257,7 @@ void Game::initialize()
 	vertex[3].texel[0] = 0.25f;
 	vertex[3].texel[1] = 0.25f;
 
+	//back
 	vertex[4].texel[0] = 0.75f;
 	vertex[4].texel[1] = 0.5f;
 	vertex[5].texel[0] = 1.0f;
@@ -231,23 +267,45 @@ void Game::initialize()
 	vertex[7].texel[0] = 0.75f;
 	vertex[7].texel[1] = 0.25f;
 
+	//right
 	vertex[8].texel[0] = 0.25f;
 	vertex[8].texel[1] = 0.5f;
 	vertex[9].texel[0] = 0.5f;
 	vertex[9].texel[1] = 0.5f;
 	vertex[10].texel[0] = 0.5f;
 	vertex[10].texel[1] = 0.25f;
-	vertex[10].texel[0] = 0.25f;
-	vertex[10].texel[1] = 0.25f;
+	vertex[11].texel[0] = 0.25f;
+	vertex[11].texel[1] = 0.25f;
 
-	vertex[11].texel[0] = 0.0f;
-	vertex[11].texel[1] = 0.5f;
-	vertex[12].texel[0] = 0.25f;
+	//left
+	vertex[12].texel[0] = 0.0f;
 	vertex[12].texel[1] = 0.5f;
 	vertex[13].texel[0] = 0.25f;
-	vertex[13].texel[1] = 0.25f;
-	vertex[14].texel[0] = 0.0f;
+	vertex[13].texel[1] = 0.5f;
+	vertex[14].texel[0] = 0.25f;
 	vertex[14].texel[1] = 0.25f;
+	vertex[15].texel[0] = 0.0f;
+	vertex[15].texel[1] = 0.25f;
+
+	//top
+	vertex[16].texel[0] = 0.25f;
+	vertex[16].texel[1] = 0.5f;
+	vertex[17].texel[0] = 0.25f;
+	vertex[17].texel[1] = 0.75f;
+	vertex[18].texel[0] = 0.5f;
+	vertex[18].texel[1] = 0.75f;
+	vertex[19].texel[0] = 0.5f;
+	vertex[19].texel[1] = 0.5f;
+
+	//bottom
+	vertex[20].texel[0] = 0.25f;
+	vertex[20].texel[1] = 0.0f;
+	vertex[21].texel[0] = 0.25f;
+	vertex[21].texel[1] = 0.25f;
+	vertex[22].texel[0] = 0.5f;
+	vertex[22].texel[1] = 0.25f;
+	vertex[23].texel[0] = 0.5f;
+	vertex[23].texel[1] = 0.25f;
 
 
 	/*Index of Poly / Triangle to Draw */
